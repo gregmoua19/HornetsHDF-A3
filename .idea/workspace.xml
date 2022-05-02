@@ -4,17 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="336d32c5-6f4b-4a8f-b637-9fea310958e7" name="Default Changelist" comment="Updated Project 3 repo to have Project 2 code. Began working on new and more detailed helicopter">
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/org/csc133/a3/gameobjects/FlightPath.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/org/csc133/a3/gameobjects/NonPlayerHelicopter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/org/csc133/a3/gameobjects/Off.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/org/csc133/a3/gameobjects/PlayerHelicopter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/org/csc133/a3/gameobjects/Ready.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/org/csc133/a3/gameobjects/Starting.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/org/csc133/a3/gameobjects/Stopping.java" afterDir="false" />
+    <list default="true" id="336d32c5-6f4b-4a8f-b637-9fea310958e7" name="Default Changelist" comment="Added most of the new files&#10;-Began refactoring helicopter into state pattern&#10;-Began creating new zoom command and flight path class">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/org/csc133/a3/gameobjects/GameObjectCollection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/target/classes/org/csc133/a3/AppMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/common/target/classes/org/csc133/a3/AppMain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/common/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/org/csc133/a3/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/org/csc133/a3/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/org/csc133/a3/gameobjects/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/org/csc133/a3/gameobjects/Building.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/org/csc133/a3/gameobjects/Burning.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/org/csc133/a3/gameobjects/Burning.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/org/csc133/a3/gameobjects/Fixed.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/org/csc133/a3/gameobjects/Fixed.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/org/csc133/a3/gameobjects/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/org/csc133/a3/gameobjects/GameObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/org/csc133/a3/interfaces/Drawable.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,6 +59,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/common/src/main/java/org/csc133/a3" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
@@ -804,7 +805,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651131290141</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added most of the new files&#10;-Began refactoring helicopter into state pattern&#10;-Began creating new zoom command and flight path class">
+      <created>1651216846426</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1651216846426</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -821,6 +829,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="New Project 3" />
     <MESSAGE value="Updated Project 3 repo to have Project 2 code. Began working on new and more detailed helicopter" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Project 3 repo to have Project 2 code. Began working on new and more detailed helicopter" />
+    <MESSAGE value="Added most of the new files&#10;-Began refactoring helicopter into state pattern&#10;-Began creating new zoom command and flight path class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added most of the new files&#10;-Began refactoring helicopter into state pattern&#10;-Began creating new zoom command and flight path class" />
   </component>
 </project>

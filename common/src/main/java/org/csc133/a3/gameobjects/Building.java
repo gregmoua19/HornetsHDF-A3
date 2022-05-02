@@ -10,6 +10,7 @@ import com.sun.org.apache.xpath.internal.operations.Or;
 import java.util.Random;
 
 public class Building extends Fixed{
+
     int value;
     int damage;
     int budgetArea;

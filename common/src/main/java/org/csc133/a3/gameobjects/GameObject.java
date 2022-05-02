@@ -1,7 +1,7 @@
 package org.csc133.a3.gameobjects;
 
-import org.csc133.a3.interfaces.Drawable;
 import com.codename1.ui.Graphics;
+import com.codename1.ui.Transform;
 import com.codename1.ui.geom.Point;
 import com.codename1.ui.geom.Dimension;
 
@@ -16,9 +16,18 @@ public abstract class GameObject implements Drawable {
      int building;
      int value;
      int damage;
+     Transform rotate = Transform.makeIdentity();
+     Transform translate = Transform.makeIdentity();
+     Transform scale = Transform.makeIdentity();
 
     //Init method
     public abstract void init();
+
+    public abstract rotate(float degrees);
+
+    public abstract translate(float tx, float ty);
+
+    public abstract scale(float sx, float sy);
 
     //Collision method
     public boolean collidesWith(GameObject other) {
@@ -76,6 +85,10 @@ public abstract class GameObject implements Drawable {
     }
 
     protected void setState(FireState instance) {
+    }
+
+    public void draw(Graphics g, Point containerOrigin, Point screenOrigin) {
+
     }
 
 }

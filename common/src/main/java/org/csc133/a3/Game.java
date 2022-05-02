@@ -1,10 +1,7 @@
 package org.csc133.a3;
 
 import com.codename1.charts.util.ColorUtil;
-import com.codename1.ui.Button;
-import com.codename1.ui.Display;
-import com.codename1.ui.Form;
-import com.codename1.ui.Graphics;
+import com.codename1.ui.*;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.util.UITimer;
@@ -21,6 +18,7 @@ public class Game extends Form implements Runnable{
     private GlassCockpit gcp;
     private MapView mv;
     private ControlCluster cc;
+    //Transform tx = Transform.makeIdentity();
 
     public final static int DISP_W = Display.getInstance().getDisplayWidth();
     public final static int DISP_H = Display.getInstance().getDisplayHeight();

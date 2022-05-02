@@ -1,6 +1,6 @@
 package org.csc133.a3.gameobjects;
 
-public class Burning implements FireState{
+public class Burning implements FireState {
 
     private static Burning instance = new Burning();
 
