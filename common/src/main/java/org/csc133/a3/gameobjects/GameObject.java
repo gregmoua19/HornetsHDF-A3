@@ -5,7 +5,7 @@ import com.codename1.ui.Transform;
 import com.codename1.ui.geom.Point;
 import com.codename1.ui.geom.Dimension;
 
-public abstract class GameObject implements Drawable {
+public abstract class GameObject {
 
     //must be general that applies to all
 
@@ -16,18 +16,11 @@ public abstract class GameObject implements Drawable {
      int building;
      int value;
      int damage;
-     Transform rotate = Transform.makeIdentity();
-     Transform translate = Transform.makeIdentity();
-     Transform scale = Transform.makeIdentity();
+     Transform scale, rotate, translate;
+
 
     //Init method
     public abstract void init();
-
-    public abstract rotate(float degrees);
-
-    public abstract translate(float tx, float ty);
-
-    public abstract scale(float sx, float sy);
 
     //Collision method
     public boolean collidesWith(GameObject other) {
@@ -40,6 +33,12 @@ public abstract class GameObject implements Drawable {
     }
 
     public abstract int getSize();
+
+    public abstract void rotate(double degrees);
+
+    public abstract void scale(double sx, double sy);
+
+    public abstract void translate(double tx, double ty);
 
     public Point getPoint(){
         return point;
@@ -57,7 +56,15 @@ public abstract class GameObject implements Drawable {
         this.dim = dim;
     }
 
+    public void setColor(int Color) {
+        this.color = color;
+    }
+
     public void grow() {
+    }
+
+    public int getColor() {
+        return color;
     }
 
     public int getBudgetArea(){

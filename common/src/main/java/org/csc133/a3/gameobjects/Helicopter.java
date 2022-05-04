@@ -2,13 +2,21 @@ package org.csc133.a3.gameobjects;
 
 
 import com.codename1.charts.util.ColorUtil;
+import com.codename1.ui.Transform;
 import com.codename1.ui.geom.Point;
 import org.csc133.a3.Game;
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.Graphics;
 import org.csc133.a3.gameobjects.Helipad;
 
-public class Helicopter extends Movable{
+import java.awt.*;
+import java.util.ArrayList;
+
+public class Helicopter extends Movable {
+
+
+
+    private ArrayList<GameObject> heloParts;
     private int fuel;
     private int water;
     private Helipad helipad;
@@ -17,8 +25,19 @@ public class Helicopter extends Movable{
     public Helicopter(){
         init();
     }
+    private Transform scale;
+    private Transform translate;
+    private Transform rotate;
+    private Body body;
 
     public void init(){
+
+        scale = Transform.makeIdentity();
+        translate = Transform.makeIdentity();
+        rotate = Transform.makeIdentity();
+
+        body = new Body();
+        body.scale(5,5);
         this.color = ColorUtil.YELLOW;
         int height = Game.DISP_H / 50;
         int width = Game.DISP_W / 30;
@@ -35,7 +54,7 @@ public class Helicopter extends Movable{
                 helipad.getPoint().getY() + height-10);
         lineLocation = new Point(
                 point.getX() + 25,
-                point.getY() - 100
+                point.getY() - 200
         );
     }
 
@@ -111,6 +130,21 @@ public class Helicopter extends Movable{
     }
 
     @Override
+    public void rotate(double degrees) {
+        rotate.rotate((float) Math.toRadians(degrees),0,0);
+    }
+
+    @Override
+    public void scale(double sx, double sy) {
+        scale.scale((float) sx, (float) sy);
+    }
+
+    @Override
+    public void translate(double tx, double ty) {
+        translate.translate((float) tx, (float) ty);
+    }
+
+    @Override
     public String toString() {
         return "Helicopter";
     }
@@ -121,26 +155,46 @@ public class Helicopter extends Movable{
     }
 
     @Override
-    public void draw(Graphics g, Point containerOrigin) {
-        int x = containerOrigin.getX() +
+    public void draw(Graphics g, Point containerOrigin, Point screenOrigin) {
+        Transform heliTrans = Transform.makeIdentity();
+        g.getTransform(heliTrans);
+        Transform heliTransOrig = heliTrans.copy();
+
+        heliTrans.translate(screenOrigin.getX(),screenOrigin.getY());
+
+        heliTrans.translate(translate.getTranslateX(),
+                translate.getTranslateY());
+
+        heliTrans.concatenate(rotate);
+        heliTrans.scale(scale.getScaleX(), scale.getScaleY());
+
+        heliTrans.translate(-screenOrigin.getX(),-screenOrigin.getY());
+        g.setTransform(heliTrans);
+
+
+
+        int x = containerOrigin.getX() -
                 point.getX();
-        int y = containerOrigin.getY() +
+        int y = containerOrigin.getY() -
                 point.getY();
+
         g.setColor(color);
 
-
         //drawing a filled circle and line relative to its location
-        g.fillArc(x,y,50,50,0,360);
-        g.drawLine(x + 25,y + 25,
+
+        //g.drawArc(x,y,100,100,0,360);
+        //g.drawLine(x + 100,y + 100,
 
                 //x1 y1 guarantees that the line starts
                 //in the center of the circle but the
                 //x2 y2 are dictated by the angle of the heading
-                lineLocation.getX() + containerOrigin.getX(),
-                lineLocation.getY() + containerOrigin.getY());
-        g.drawString("Water: " + water,x,y  + 100);
+                //lineLocation.getX() + containerOrigin.getX(),
+                //lineLocation.getY() + containerOrigin.getY());
+        //g.drawString("Water: " + water,x,y  + 100);
 
-        g.drawString("Fuel: " + fuel, x,y + 60);
+        //g.drawString("Fuel: " + fuel, x,y + 60);
+        body.draw(g,containerOrigin,screenOrigin);
+        g.setTransform(heliTransOrig);
     }
 
     @Override
@@ -233,3 +287,83 @@ public class Helicopter extends Movable{
                 && (fireXLoc + fire.getSize() >= dim.getWidth()));
     }
 }
+
+class Body extends GameObject {
+    private int radius, height, width;
+    public Body() {
+        init();
+    }
+    @Override
+    public void init() {
+        radius = 100;
+        height = 33;
+        width = 100;
+        dim = new Dimension(height,width);
+        scale = Transform.makeIdentity();
+        rotate = Transform.makeIdentity();
+        translate = Transform.makeIdentity();
+    }
+
+    @Override
+    public int getSize() {
+        return 0;
+    }
+
+    @Override
+    public void rotate(double degrees) {
+        rotate.rotate((float) Math.toRadians(degrees),0,0);
+    }
+
+    @Override
+    public void scale(double sx, double sy) {
+        scale.scale((float) sx, (float) sy);
+    }
+
+    @Override
+    public void translate(double tx, double ty) {
+        translate.translate((float) tx, (float) ty);
+    }
+
+    @Override
+    public String toString() {
+        return null;
+    }
+
+    public void draw(Graphics g, Point containerOrigin, Point screenOrigin) {
+
+
+        //a diagram of how the finished helicopter will begin to look like
+        g.setColor(ColorUtil.YELLOW);
+
+        //main arc and engine block
+        g.drawArc(0,0,radius,radius,135,270);
+        g.drawRect(0,-radius/8-10,width,height);
+
+        //side bars
+        g.drawRect(-50, -radius/8-10, height - 15,width + 25);
+        g.drawRect(135, -radius/8-10 , height - 15,width + 25);
+
+
+        //g.drawLine(-15, -radius/8-10);
+
+        g.setColor(ColorUtil.GRAY);
+        //small bars
+        g.drawRect(-30,50,width/3,height/3);
+        g.drawRect(100,50,width/3,height/3);
+        g.drawRect(-30, -radius/8-10 , width/3, height/3);
+        g.drawRect(100, -radius/8-10, width/3, height/3);
+
+
+
+    }
+
+class Propeller {
+    public Propeller() {
+    }
+}
+}
+
+
+
+
+

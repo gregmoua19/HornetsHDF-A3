@@ -28,6 +28,7 @@ public class GameWorld {
         NUMBER_OF_BUILDINGS = 3;
         Random rand = new Random();
         helicopter = new Helicopter();
+        helicopter.translate(Game.DISP_W/2, Game.DISP_H/2);
         helipad = new Helipad();
         river = new River();
         NUMBER_OF_FIRES = rand.nextInt(3)+6;
@@ -59,30 +60,30 @@ public class GameWorld {
             if(i == 0) {
                 buildings.get(i).setPoint(
                         new Point(
-                                Game.DISP_W/8,
-                                2*Game.DISP_H/5));
+                                Game.DISP_W/10,
+                                2 * Game.DISP_H/7));
                 buildings.get(i).setDim(
                         new Dimension(
-                                Game.DISP_W/10,
+                                Game.DISP_W/7,
                                 2*Game.DISP_H/5));
             } else if (i == 1) {
                 buildings.get(i).setPoint(
                         new Point(
                                 Game.DISP_W/4,
-                                Game.DISP_H/15));
+                                9 * Game.DISP_H/10));
                 buildings.get(i).setDim(
                         new Dimension(
-                                Game.DISP_W/2,
+                                2 * Game.DISP_W/ 3 ,
                                 Game.DISP_H/10));
             } else {
                 buildings.get(i).setPoint(
                         new Point(
                                 4 * Game.DISP_W/5,
-                                4 * Game.DISP_H/9 ));
+                                3 * Game.DISP_H/10 ));
                 buildings.get(i).setDim(
                         new Dimension(
                                 Game.DISP_W/9,
-                                Game.DISP_H/4));
+                                Game.DISP_H / 3));
             }
 
             allGameObjects.add(buildings.get(i));

@@ -13,6 +13,6 @@ public abstract class Fixed extends GameObject{
     public abstract boolean collidesWith(GameObject other);
 
     @Override
-    public abstract void draw(Graphics g, Point containerOrigin);
+    public abstract void draw(Graphics g, Point containerOrigin, Point screenOrigin);
 
 }

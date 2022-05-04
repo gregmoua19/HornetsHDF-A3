@@ -1,11 +1,10 @@
 package org.csc133.a3.gameobjects;
 
 import com.codename1.charts.util.ColorUtil;
-import com.codename1.ui.Font;
 import com.codename1.ui.Graphics;
+import com.codename1.ui.Transform;
 import com.codename1.ui.geom.Point;
 import com.codename1.ui.geom.Dimension;
-import com.sun.org.apache.xpath.internal.operations.Or;
 
 import java.util.Random;
 
@@ -17,6 +16,7 @@ public class Building extends Fixed{
     int maxDamage;
     int originalValue;
     int valuePercentage;
+    Transform translate, scale, rotator;
 
     public Building(int value){
         originalValue = value;
@@ -26,6 +26,9 @@ public class Building extends Fixed{
 
     @Override
     public void init() {
+        translate = Transform.makeIdentity();
+        scale = Transform.makeIdentity();
+        rotator = Transform.makeIdentity();
         this.color = ColorUtil.rgb(255,0,0);
         damage = 0;
         valuePercentage = 100;
@@ -49,6 +52,18 @@ public class Building extends Fixed{
     @Override
     public int getSize() {
         return dim.getHeight();
+    }
+
+    public void rotate(double degrees) {
+        rotator.rotate((float) Math.toRadians(degrees),0,0);
+    }
+
+    public void scale(double sx, double sy) {
+        scale.scale((float) sx, (float) sy);
+    }
+
+    public void translate(double tx, double ty) {
+        translate.translate((float) tx, (float) ty);
     }
 
     @Override
@@ -79,15 +94,33 @@ public class Building extends Fixed{
     }
 
     @Override
-    public void draw(Graphics g, Point containerOrigin) {
-        int offX = point.getX() + containerOrigin.getX();
-        int offY = point.getY() + containerOrigin.getY();
+    public void draw(Graphics g, Point containerOrigin, Point screenOrigin) {
+        Transform heliTrans = Transform.makeIdentity();
+        g.getTransform(heliTrans);
+        Transform heliTransOrig = heliTrans.copy();
+
+        heliTrans.translate(screenOrigin.getX(),screenOrigin.getY());
+
+        heliTrans.translate(translate.getTranslateX(),
+                translate.getTranslateY());
+
+        heliTrans.concatenate(rotator);
+        heliTrans.scale(scale.getScaleX(), scale.getScaleY());
+
+        heliTrans.translate(-screenOrigin.getX(),-screenOrigin.getY());
+        g.setTransform(heliTrans);
+
+        int offX = point.getX() - containerOrigin.getX();
+        int offY = point.getY() - containerOrigin.getY();
         int bottomX = offX + 10 + dim.getWidth();
-        int bottomY = offY + 10 + dim.getHeight();
+        //int bottomY = offY + 10 + dim.getHeight();
         g.setColor(ColorUtil.rgb(255,0,0));
         g.drawRect(offX,offY,dim.getWidth(),dim.getHeight());
-        g.drawString("V: " + originalValue, bottomX , bottomY- 100);
-        g.drawString("D: " + maxDamage + "%", bottomX , bottomY - 50);
+        g.drawString("V: " + originalValue, bottomX , offY + 50);
+        g.drawString("D: " + maxDamage + "%", bottomX , offY);
+
+        g.setTransform(heliTransOrig);
+
     }
 
     public void setFireinBuilding(Fire fire) {

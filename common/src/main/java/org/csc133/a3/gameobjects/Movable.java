@@ -20,7 +20,7 @@ public abstract class Movable extends GameObject implements Steerable {
     public abstract Dimension getSize(Dimension d);
 
     @Override
-    public abstract void draw(Graphics g, Point containerOrigin);
+    public abstract void draw(Graphics g, Point containerOrigin, Point screenOrigin);
 
     @Override
     public abstract void steerLeft();
